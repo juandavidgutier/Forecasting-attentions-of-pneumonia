@@ -113,7 +113,7 @@ plot(testData$Attentions, gbm.pred)
 
 
 
-# performance metrics
+# interpretation analysis
 X <- munici%>%
   dplyr::select(- Attentions) %>%
   as.data.frame()
@@ -126,12 +126,12 @@ plan("callr", workers = 2)
 # Permutation Feature Importance
 predictor_imp <- Predictor$new(ml_model, data = X, y = munici$Attentions)
 importace_rf = FeatureImp$new(predictor_imp, loss = "mse", n.repetitions = 500)
-plot(importace_rf) + theme_bw() + theme(plot.title = element_text(size=22)) + labs(title="i")
+plot(importace_rf) + theme_bw() 
 
 # Feature interactions
 predictor_inter <- Predictor$new(ml_model, data = X)
 interactions <- Interaction$new(predictor_inter)
-plot(interactions) + theme_bw() + theme(plot.title = element_text(size=22)) + labs(title="j")
+plot(interactions) + theme_bw() 
 
 
 
